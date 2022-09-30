@@ -1,0 +1,317 @@
+/// <reference types="Cypress" />
+ 
+describe('My First Test Suite', function() 
+{
+ 
+it('My FirstTest case',function() {
+ 
+ 
+cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
+cy.get('.search-keyword').type('ca')
+cy.wait(2000)
+//selenium get hit url in browser, cypress get acts like findElement of selenium
+cy.get('.product').should('have.length',5)
+cy.get('.product:visible').should('have.length',4)
+//Parent child chaining
+cy.get('.products').as('productLocator')
+cy.get('@productLocator').find('.product').should('have.length',4)
+cy.get(':nth-child(3) > .product-action > button').click()
+cy.get('@productLocator').find('.product').eq(2).contains('ADD TO CART').click().then(function()
+{
+    console.log('sf')
+})
+ 
+cy.get('@productLocator').find('.product').each(($el, index, $list) => {
+ 
+const textVeg=$el.find('h4.product-name').text()
+if(textVeg.includes('Cashews'))
+{
+$el.find('button').click()
+}
+})
+ 
+//assert if logo text is correctly displayed
+cy.get('.brand').should('have.text','GREENKART')
+ 
+//this is to print in logs
+cy.get('.brand').then(function(logoelement)
+{
+    cy.log(logoelement.text())
+ 
+})
+//const logo=cy.get('.brand')
+//cy.log(cy.get('.brand').text())
+// cy.log(logo.text())
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+//fixture
+ 
+}  )
+ 
+ 
+ 
+}  )
+
+-----------------------------------------------------------------------------
+/// <reference types="Cypress" />
+ 
+describe('My Second Test Suite', function() 
+{
+ 
+it('My FirstTest case',function() {
+ 
+ 
+cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
+cy.get('.search-keyword').type('ca')
+cy.wait(2000)
+//selenium get hit url in browser, cypress get acts like findElement of selenium
+ 
+//Parent child chaining
+cy.get('.products').as('productLocator')
+cy.get('@productLocator').find('.product').each(($el, index, $list) => {
+ 
+const textVeg=$el.find('h4.product-name').text()
+if(textVeg.includes('Cashews'))
+{
+$el.find('button').click()
+}
+})
+cy.get('.cart-icon > img').click()
+
+--------------------------------------------------------------------------
+/// <reference types="Cypress" />
+ 
+describe('My Second Test Suite', function() 
+{
+ 
+it('My FirstTest case',function() {
+ 
+//Check boxes
+cy.visit("https://rahulshettyacademy.com/AutomationPractice/")
+cy.get('#checkBoxOption1').check().should('be.checked').and('have.value','option1')
+cy.get('#checkBoxOption1').uncheck().should('not.be.checked')
+cy.get('input[type="checkbox"]').check(['option2','option3'])
+ 
+//Static Dropdown
+ 
+cy.get('select').select('option2').should('have.value','option2')
+ 
+//Dynamic dropdowns
+cy.get('#autocomplete').type('ind')
+ 
+cy.get('.ui-menu-item div').each(($e1, index, $list) => {
+ 
+    if($e1.text()==="India")
+    {
+        $e1.click()
+    }
+ 
+ 
+})
+//autocomplete
+cy.get('#autocomplete').should('have.value','India')
+//visible invisible
+cy.get('#displayed-text').should('be.visible')
+cy.get('#hide-textbox').click()
+cy.get('#displayed-text').should('not.be.visible')
+cy.get('#show-textbox').click()
+cy.get('#displayed-text').should('be.visible')
+ 
+//radio buttons
+ 
+cy.get('[value="radio2"]').check().should('be.checked')
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+}  )
+ 
+ 
+ 
+}  )
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+//fixture
+ 
+}  )
+ 
+ 
+ 
+}  )
+
+-------------------------------------------------------------------------------
+/// <reference types="Cypress" />
+ 
+describe('My Second Test Suite', function() 
+{
+ 
+it('My FirstTest case',function() {
+ 
+//Check boxes
+cy.visit("http://qaclickacademy.com/practice.php")
+cy.get('#alertbtn').click()
+cy.get('[value="Confirm"]').click()
+//window:alert
+cy.on('window:alert',(str)=>
+{
+    //Mocha
+    expect(str).to.equal('Hello , share this practice page and share your knowledge')
+})
+ 
+cy.on('window:confirm',(str)=>
+{
+    //Mocha
+    expect(str).to.equal('Hello , Are you sure you want to confirm?')
+})
+ 
+cy.get('#opentab').invoke('removeAttr','target').click()
+ 
+cy.url().should('include','qaclickacademy')
+ 
+cy.go('back')
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+}  )
+ 
+ 
+ 
+}  )
+---------------------------------------------------------------------
+/// <reference types="Cypress" />
+ 
+describe('My Second Test Suite', function() 
+{
+ 
+it('My FirstTest case',function() {
+ 
+//Check boxes
+cy.visit("https://rahulshettyacademy.com/AutomationPractice/")
+ 
+cy.get('tr td:nth-child(2)').each(($e1, index, $list) => {
+ 
+    const text=$e1.text()
+    if(text.includes("Python"))
+    {
+ 
+        cy.get("tr td:nth-child(2)").eq(index).next().then(function(price)
+        {
+         const priceText=   price.text()
+         expect(priceText).to.equal('26')
+        })
+    }
+ 
+})
+ 
+ 
+})
+ 
+ 
+})
+ 
+----------------------------------------------------------
+/// <reference types="Cypress" />
+ 
+describe('My Second Test Suite', function() 
+{
+ 
+it('My FirstTest case',function() {
+ 
+//Check boxes
+cy.visit("https://rahulshettyacademy.com/AutomationPractice/")
+ 
+//cy.get('div.mouse-hover-content').invoke('show')
+cy.contains('Top').click({force: true})
+cy.url().should('include','top')
+})
+ 
+ 
+}) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
