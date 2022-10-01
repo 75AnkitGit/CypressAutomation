@@ -22,7 +22,7 @@
   "author": "RahulShetty",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^7.1.0",
+    "cypress": "^7.7.0",
     "cypress-cucumber-preprocessor": "^2.5.5",
     "mocha": "^5.2.0",
     "mochawesome": "^4.0.1",
