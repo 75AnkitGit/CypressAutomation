@@ -1,11 +1,12 @@
 import { helperMethods } from '../../support/helperMethods.js';
 describe('My first Test suit', function () {
+    let xdata, tData;
     before(function () {
-        cy.fixture('xpath').then(function (xpath) {
-            this.xpath = xpath;
+        cy.fixture('xpathData').then(function (fData) {
+            xdata = fData;
         })
-        cy.fixture('data').then(function (testData) {
-            this.testData = testData;
+        cy.fixture('Testdata').then(function (testData) {
+            tData = testData;
         })
     })
     it('Placing Order Of Cauliflower', function () {
@@ -27,13 +28,13 @@ describe('My first Test suit', function () {
     it.only('Aseertion in Cypress Using Xpath', function () {
         cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/");
         cy.title().should('eq', 'GreenKart - veg and fruits kart');
-        helperMethods.enterTextWithXpath(this.xpath.search, this.testData.serachText);
-        cy.wait(6000);
-        helperMethods.clickWithXpath(this.xpath.addToCart);
+        helperMethods.enterTextWithXpath(xdata.search, tData.serachText);
+        cy.wait(5000);
+        helperMethods.clickWithXpath(xdata.addToCart);
         cy.xpath('//strong[text()="32"]').should('have.text', '32');
         cy.xpath('//img[@alt="Cart"]').click();
-        cy.xpath('//button[text()="PROCEED TO CHECKOUT"]').click();
-        cy.xpath('//input[@class="promoCode"]').type("Ankit");
+        helperMethods.clickWithXpath(xdata.CheckOutButton);
+        helperMethods.enterTextWithXpath(xdata.promoCodeButton, tData.promoCode)
         cy.xpath('//button[@class="promoBtn"]').click().wait(5000);
         cy.xpath('//span[@class="promoInfo"]').should('have.text', 'Invalid code ..!').wait(5000);
         cy.xpath('//span[@class="discountPerc"]').should('have.text', '0%');

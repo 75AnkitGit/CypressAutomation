@@ -1,4 +1,0 @@
-{
-  "search": "//input[@class='search-keyword']",
-  "addToCart": "//div[@class='product-action']/button"
-}

@@ -1,0 +1,6 @@
+{
+  "search": "//input[@class='search-keyword']",
+  "addToCart": "//div[@class='product-action']/button",
+  "CheckOutButton": "//button[text()='PROCEED TO CHECKOUT']",
+  "promoCodeButton": "//input[@class='promoCode']"
+}
